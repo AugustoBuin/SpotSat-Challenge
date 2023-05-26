@@ -1,0 +1,12 @@
+{
+  "name": "spotsat-challenge",
+  "version": "1.0.0",
+  "description": "a JSON REST API focused in geographic data for the mapping of areas.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
