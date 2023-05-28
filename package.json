@@ -6,15 +6,24 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AugustoBuin/SpotSat-Challenge.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AugustoBuin/SpotSat-Challenge/issues"
+  },
+  "homepage": "https://github.com/AugustoBuin/SpotSat-Challenge#readme",
   "dependencies": {
     "body-parser": "^1.20.2",
-    "chai": "^4.3.7",
     "express": "^4.18.2",
-    "mocha": "^10.2.0",
     "pg": "^8.11.0",
-    "pg-promise": "^11.4.3"
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.31.1",
+    "sequelize-cli": "^6.6.0",
+    "supertest": "^6.3.3"
   }
 }
