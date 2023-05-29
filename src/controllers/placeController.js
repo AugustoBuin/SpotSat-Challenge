@@ -12,6 +12,15 @@ module.exports = {
     }
   },
 
+  async listAreas(req, res) {
+    try {
+      const area = await Area.findAll();
+      res.json(area);
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error(listAreas)' });
+    }
+  },
+
   async createPlace(req, res) {
     try {
       const { name, latitude, longitude } = req.body;
@@ -26,6 +35,18 @@ module.exports = {
     }
   },
 
+  async createArea(req, res) {
+    try {
+      const { name, polygon_geom} = req.body;
+      const place = await Place.create({
+        area_name: name,
+        polygon_geom: [polygon_geom],
+      });
+      res.status(201).json(place);
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error(createArea)' });
+    }
+  },
 
   async getPlace(req, res) {
     try {
@@ -41,18 +62,47 @@ module.exports = {
     }
   },
 
+  async getArea(req, res) {
+    try {
+      const { id } = req.params;
+      const area = await Area.findByPk(id);
+      if (!area) {
+        res.status(404).json({ error: 'Area not found' });
+      } else {
+        res.json(area);
+      }
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error(getArea)' });
+    }
+  },
+
   async deletePlace(req, res) {
     try {
       const { id } = req.params;
       const place = await Place.findByPk(id);
       if (!place) {
-        res.status(404).json({ error: 'Place not found(deletePlace)' });
+        res.status(404).json({ error: 'Place not found' });
       } else {
         await place.destroy();
         res.sendStatus(204);
       }
     } catch (error) {
       res.status(500).json({ error: 'Internal server error(deletePlace)' });
+    }
+  },
+
+  async deleteArea(req, res) {
+    try {
+      const { id } = req.params;
+      const area = await Area.findByPk(id);
+      if (!area) {
+        res.status(404).json({ error: 'Area not found' });
+      } else {
+        await place.destroy();
+        res.sendStatus(204);
+      }
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error(deleteArea)' });
     }
   },
 
@@ -76,27 +126,6 @@ module.exports = {
       res.json({ distance });
     } catch (error) {
       res.status(500).json({ error: 'Internal server error(calculateDistance)' });
-    }
-  },
-
-  async listPlacesWithinArea(req, res) {
-    try {
-      const { lat1, long1, lat2, long2 } = req.query;
-      const places = await Place.findAll({
-        where: {
-          coordinates: {
-            [Op.within]: {
-              type: 'Polygon',
-              coordinates: [
-                [[parseFloat(long1), parseFloat(lat1)], [parseFloat(long2), parseFloat(lat1)], [parseFloat(long2), parseFloat(lat2)], [parseFloat(long1), parseFloat(lat2)], [parseFloat(long1), parseFloat(lat1)]]
-              ],
-            },
-          },
-        },
-      });
-      res.json(places);
-    } catch (err) {
-      res.status(500).json({ error: 'Internal server error(listPlacesWithinArea)' });
     }
   },
 
