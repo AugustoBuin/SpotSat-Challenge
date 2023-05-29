@@ -31,7 +31,7 @@
    npm install 
    ```
 
-4. Configurate your Database in the file 'src\config.js'
+4. Configurate your Database in the file 'src\config.js' and in your postgres database by using the file 'db\db_creation.sql'
    
 5. Start the server: 
    ```shell
@@ -44,6 +44,7 @@
 7. Start testing the endpoints
 
 ## Endpoints
+
 // base route: http://localhost:3000/api/
 
 ### Places
