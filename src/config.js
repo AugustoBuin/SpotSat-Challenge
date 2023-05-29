@@ -1,7 +1,7 @@
 // database config
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('spotsatdb', 'postgres', 'Morgana', {
+const sequelize = new Sequelize('database', 'user', 'password', {
   host: 'localhost',
   dialect: 'postgres',
 });
